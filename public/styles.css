@@ -1,0 +1,105 @@
+/* Custom Styles for Smart Parking System */
+
+/* Pulse glow for available spots */
+.slot-card {
+  position: relative;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  border-width: 2px;
+}
+
+.slot-card.available {
+  border-color: rgba(16, 185, 129, 0.35);
+  background: rgba(16, 185, 129, 0.05);
+}
+
+.slot-card.available:hover {
+  border-color: #10b981;
+  background: rgba(16, 185, 129, 0.15);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px -4px rgba(16, 185, 129, 0.25);
+  cursor: pointer;
+}
+
+.slot-card.selected {
+  border-color: #6366f1 !important;
+  background: rgba(99, 102, 241, 0.25) !important;
+  box-shadow: 0 0 0 2px #6366f1, 0 8px 25px -2px rgba(99, 102, 241, 0.5) !important;
+  transform: scale(1.03);
+}
+
+.slot-card.occupied {
+  border-color: rgba(239, 68, 68, 0.3);
+  background: rgba(239, 68, 68, 0.06);
+  opacity: 0.75;
+  cursor: not-allowed;
+}
+
+.slot-card.reserved {
+  border-color: rgba(245, 158, 11, 0.35);
+  background: rgba(245, 158, 11, 0.08);
+  opacity: 0.85;
+  cursor: not-allowed;
+}
+
+/* Parking bay painted yellow boundary lines */
+.parking-deck-wrapper {
+  background-image: 
+    linear-gradient(rgba(30, 41, 59, 0.4) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(30, 41, 59, 0.4) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* Modal animation */
+@keyframes scaleUp {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-scale-up {
+  animation: scaleUp 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Nav Tab Active States */
+.nav-tab.active {
+  background-color: rgb(30, 41, 59);
+  color: white;
+  border-color: rgb(79, 70, 229);
+}
+
+/* Building card select state */
+.building-card {
+  transition: all 0.2s ease;
+}
+.building-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(99, 102, 241, 0.5);
+  box-shadow: 0 12px 30px -10px rgba(79, 70, 229, 0.2);
+}
+.building-card.active-building {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 2px #6366f1;
+}
+
+/* Print styles for parking ticket */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #printable-ticket, #printable-ticket * {
+    visibility: visible;
+  }
+  #printable-ticket {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    background: white !important;
+    color: black !important;
+  }
+}
