@@ -470,7 +470,7 @@ function selectPaymentTab(tab) {
 function generateUpiQrCode() {
   const container = document.getElementById('upi-qrcode-container');
   container.innerHTML = '';
-  const total = state.currentQuote ? state.currentQuote.total.toFixed(2) : '150.00';
+  const total = state.currentQuote ? state.currentQuote.total.toFixed(2) : '47.20';
   const upiUrl = `upi://pay?pa=smartpark@bank&pn=SmartParkSystems&am=${total}&cu=INR&tn=ParkingSpot-${state.selectedSlot?.code || 'P1'}`;
 
   new QRCode(container, {

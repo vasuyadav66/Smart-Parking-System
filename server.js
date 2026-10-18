@@ -22,7 +22,7 @@ const buildings = [
     totalFloors: 4,
     openingHours: '24/7 Access',
     amenities: ['EV Fast Charging', 'CCTV 24x7', 'Valet Assist', 'Covered Roof', 'Car Spa'],
-    baseRatePerHour: 40,
+    baseRatePerHour: 20,
     rating: 4.8,
     areas: [
       {
@@ -30,7 +30,7 @@ const buildings = [
         name: 'Basement 1 (B1) - Premium & EV Bay',
         level: 'Level -1',
         description: 'Nearest to main elevator lobby, includes high-speed DC EV chargers',
-        ratePerHour: 55,
+        ratePerHour: 20,
         slotCount: 24,
         features: ['EV Ready', 'Wide Slots', 'Direct Lift Access']
       },
@@ -39,7 +39,7 @@ const buildings = [
         name: 'Basement 2 (B2) - Standard Sedan & SUV Bay',
         level: 'Level -2',
         description: 'Spacious multi-bay parking suitable for large SUVs and sedans',
-        ratePerHour: 40,
+        ratePerHour: 20,
         slotCount: 30,
         features: ['Automated Guidance Sensor', 'Covered']
       },
@@ -48,7 +48,7 @@ const buildings = [
         name: 'Ground Level (G) - Fast Express Bay',
         level: 'Ground Floor',
         description: 'Instant drop & pick quick parking for short duration business visits',
-        ratePerHour: 70,
+        ratePerHour: 25,
         slotCount: 16,
         features: ['Quick Exit', 'Security Escort', 'Valet Station']
       }
@@ -64,7 +64,7 @@ const buildings = [
     totalFloors: 3,
     openingHours: '08:00 AM - 01:00 AM',
     amenities: ['Mall Direct Entry', 'Car Wash', 'Handicap Friendly', 'Security Patrol'],
-    baseRatePerHour: 50,
+    baseRatePerHour: 20,
     rating: 4.9,
     areas: [
       {
@@ -72,7 +72,7 @@ const buildings = [
         name: 'P1 - Cinema & Food Court Level',
         level: 'Level 1 Under',
         description: 'Direct escalator entrance into IMAX & Food Court',
-        ratePerHour: 60,
+        ratePerHour: 25,
         slotCount: 20,
         features: ['Mall Lobby Access', 'Bright LED Zone']
       },
@@ -81,7 +81,7 @@ const buildings = [
         name: 'P2 - Shoppers General Bay',
         level: 'Level 2 Under',
         description: 'Affordable extended shopping parking with trolley drop areas',
-        ratePerHour: 45,
+        ratePerHour: 20,
         slotCount: 28,
         features: ['Trolley Return Point', 'CCTV Monitored']
       }
@@ -97,7 +97,7 @@ const buildings = [
     totalFloors: 5,
     openingHours: '24/7 Corporate Pass',
     amenities: ['ANPR Automatic Plate Reader', 'Chauffeur Lounge', 'EV Superchargers'],
-    baseRatePerHour: 65,
+    baseRatePerHour: 20,
     rating: 4.7,
     areas: [
       {
@@ -105,7 +105,7 @@ const buildings = [
         name: 'VIP Executive Deck',
         level: 'Mezzanine Level',
         description: 'Concierge serviced executive parking with extra clearance',
-        ratePerHour: 95,
+        ratePerHour: 25,
         slotCount: 16,
         features: ['VIP Security', 'Chauffeur Seating', 'Zero Wait Exit']
       },
@@ -114,7 +114,7 @@ const buildings = [
         name: 'B1 - West Wing Tower Bay',
         level: 'Level -1',
         description: 'Connecting to Tower A & B headquarters',
-        ratePerHour: 65,
+        ratePerHour: 20,
         slotCount: 26,
         features: ['Turnstile Access', 'Fast Toll Tag']
       }
@@ -130,7 +130,7 @@ const buildings = [
     totalFloors: 3,
     openingHours: '24/7 Round the Clock',
     amenities: ['Airport Shuttle', 'Long Stay Discounts', 'Luggage Assistance', 'Undercover Security'],
-    baseRatePerHour: 55,
+    baseRatePerHour: 20,
     rating: 4.6,
     areas: [
       {
@@ -138,7 +138,7 @@ const buildings = [
         name: 'Terminal Express Pod',
         level: 'Level 0 Walkway',
         description: '3 minutes covered walkway directly into Terminal departure gates',
-        ratePerHour: 80,
+        ratePerHour: 25,
         slotCount: 22,
         features: ['Direct Terminal Walk', 'Baggage Carts']
       },
@@ -147,7 +147,7 @@ const buildings = [
         name: 'Long Stay Multi-Day Yard',
         level: 'Basement P3',
         description: 'Secure multi-day and overnight parking with daily capped rates',
-        ratePerHour: 40,
+        ratePerHour: 15,
         slotCount: 32,
         features: ['24/7 Guarded', 'Low Daily Cap']
       }
@@ -212,14 +212,14 @@ const bookings = [
     durationHours: 3,
     endTime: new Date(Date.now() + 135 * 60 * 1000).toISOString(),
     pricing: {
-      ratePerHour: 55,
+      ratePerHour: 20,
       durationHours: 3,
-      baseFare: 165,
-      addOnsAmount: 50,
-      addOns: ['EV Supercharging (Fast DC)'],
-      subtotal: 215,
-      tax: 38.7,
-      total: 253.7
+      baseFare: 60,
+      addOnsAmount: 40,
+      addOns: ['EV Fast Charging'],
+      subtotal: 100,
+      tax: 18,
+      total: 118
     },
     payment: {
       method: 'UPI',
@@ -324,10 +324,10 @@ app.post('/api/bookings/quote', (req, res) => {
 
   // Addons pricing
   const addOnPricingMap = {
-    'ev_charging': { name: 'Fast EV Charging', price: 120 },
-    'car_wash': { name: 'Eco High-Pressure Car Wash', price: 199 },
-    'valet_assist': { name: 'Executive Valet Service', price: 79 },
-    'helmet_lock': { name: 'Secure Helmet Locker', price: 20 }
+    'ev_charging': { name: 'Fast EV Charging', price: 40 },
+    'car_wash': { name: 'Eco High-Pressure Car Wash', price: 50 },
+    'valet_assist': { name: 'Executive Valet Service', price: 25 },
+    'helmet_lock': { name: 'Secure Helmet Locker', price: 10 }
   };
 
   let addOnsAmount = 0;
@@ -408,10 +408,10 @@ app.post('/api/bookings', (req, res) => {
 
   const baseFare = rate * hours;
   const addOnPricingMap = {
-    'ev_charging': { name: 'Fast EV Charging', price: 120 },
-    'car_wash': { name: 'Eco High-Pressure Car Wash', price: 199 },
-    'valet_assist': { name: 'Executive Valet Service', price: 79 },
-    'helmet_lock': { name: 'Secure Helmet Locker', price: 20 }
+    'ev_charging': { name: 'Fast EV Charging', price: 40 },
+    'car_wash': { name: 'Eco High-Pressure Car Wash', price: 50 },
+    'valet_assist': { name: 'Executive Valet Service', price: 25 },
+    'helmet_lock': { name: 'Secure Helmet Locker', price: 10 }
   };
 
   let addOnsAmount = 0;
