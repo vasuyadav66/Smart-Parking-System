@@ -201,6 +201,8 @@ function renderAreaTabs(areas) {
     }`;
     card.onclick = () => selectArea(area.id);
 
+    const spaceStr = area.space ? `${area.space.totalAreaM2} • ${area.space.dimensionsM} (${area.space.dimensionsCm})` : '1,250 m²';
+
     card.innerHTML = `
       <div>
         <div class="flex items-center justify-between mb-1.5">
@@ -210,6 +212,10 @@ function renderAreaTabs(areas) {
           }">${area.availableSlots} Free</span>
         </div>
         <p class="text-[11px] text-slate-400 line-clamp-2">${area.description}</p>
+        <div class="flex items-center gap-1.5 text-[10px] font-mono text-cyan-300 mt-2 bg-slate-900/80 px-2 py-1 rounded border border-slate-800/80">
+          <i class="fa-solid fa-ruler-combined text-cyan-400"></i>
+          <span>${spaceStr}</span>
+        </div>
       </div>
       <div class="flex items-center justify-between pt-3 mt-3 border-t border-slate-800/80 text-xs">
         <span class="text-slate-400">${area.level}</span>
@@ -232,6 +238,12 @@ async function selectArea(areaId) {
   renderAreaTabs(state.selectedBuilding.areas);
   document.getElementById('area-rate-badge').textContent = `₹${area.ratePerHour} / hr`;
 
+  // Update area space indicators
+  const spaceBadgeVal = document.getElementById('area-space-val');
+  if (spaceBadgeVal) {
+    spaceBadgeVal.textContent = area.space ? `${area.space.totalAreaM2} (${area.space.dimensionsM})` : '1,250 m²';
+  }
+
   // Show slots layout
   const slotsPanel = document.getElementById('slots-layout-panel');
   slotsPanel.classList.remove('hidden');
@@ -239,6 +251,15 @@ async function selectArea(areaId) {
   document.getElementById('current-area-title').textContent = `${state.selectedBuilding.name} — ${area.name}`;
   document.getElementById('current-area-level').textContent = area.level;
   document.getElementById('current-area-desc').textContent = `${area.description} • Base Rate: ₹${area.ratePerHour}/hr`;
+
+  const deckSpace = document.getElementById('deck-floor-space');
+  if (deckSpace && area.space) {
+    deckSpace.textContent = `${area.space.dimensionsM} (${area.space.dimensionsCm}) • ${area.space.totalAreaM2}`;
+  }
+  const deckClearance = document.getElementById('deck-clearance');
+  if (deckClearance && area.space) {
+    deckClearance.textContent = area.space.clearance;
+  }
 
   // Fetch Slots
   try {
@@ -310,6 +331,12 @@ function renderSlotsGrid() {
         <div class="text-[9px] uppercase tracking-wider font-semibold text-slate-400 mt-0.5">
           ${slot.type}
         </div>
+        <div class="text-[9px] font-mono text-cyan-300 font-semibold mt-1 bg-slate-950/80 px-1 py-0.5 rounded border border-slate-800/80">
+          ${slot.space ? slot.space.dimensionsM : '5.0m × 2.5m'}
+        </div>
+        <div class="text-[8px] font-mono text-slate-400">
+          (${slot.space ? slot.space.dimensionsCm : '500cm × 250cm'})
+        </div>
       </div>
 
       <div class="w-full">
@@ -349,6 +376,12 @@ function selectSlot(slot) {
   document.getElementById('selected-slot-area-name').textContent = `${state.selectedArea.name} (${state.selectedBuilding.name})`;
   document.getElementById('selected-slot-type-info').innerHTML = `<i class="fa-solid fa-car"></i> ${slot.type} Bay`;
   document.getElementById('selected-slot-rate').textContent = `₹${state.selectedArea.ratePerHour}/hr`;
+
+  const slotSpaceEl = document.getElementById('selected-slot-space');
+  if (slotSpaceEl) {
+    const spaceText = slot.space ? `${slot.space.formatted} • ${slot.space.areaM2}` : '5.0m × 2.5m (500cm × 250cm) • 12.5 m²';
+    slotSpaceEl.innerHTML = `<i class="fa-solid fa-ruler-combined text-cyan-400"></i> ${spaceText}`;
+  }
 
   updatePriceCalculation();
 }
@@ -428,6 +461,12 @@ function openPaymentModal() {
   document.getElementById('modal-pay-amount').textContent = state.currentQuote.total.toFixed(2);
   document.getElementById('modal-pay-btn-label').textContent = state.currentQuote.total.toFixed(2);
   document.getElementById('modal-pay-slot-info').textContent = `${state.selectedBuilding.name} (${state.selectedSlot.code})`;
+
+  const modalSpaceEl = document.getElementById('modal-pay-space');
+  if (modalSpaceEl && state.selectedSlot) {
+    modalSpaceEl.textContent = `Space: ${state.selectedSlot.space?.formatted || '5.0m × 2.5m (500cm × 250cm)'}`;
+  }
+
   document.getElementById('modal-pay-duration').textContent = `${state.currentQuote.durationHours} Hours Duration`;
 
   // Update cardholder name preview
@@ -570,6 +609,14 @@ function openTicketModal(booking) {
   document.getElementById('pass-vehicle').textContent = booking.vehicleNumber;
   document.getElementById('pass-veh-type').textContent = booking.vehicleType;
 
+  const passSpaceEl = document.getElementById('pass-slot-space');
+  if (passSpaceEl) {
+    const spaceText = booking.slotSpace?.formatted
+      ? `${booking.slotSpace.formatted} • ${booking.slotSpace.areaM2 || ''}`
+      : '5.0m × 2.5m (500cm × 250cm) • 12.5 m²';
+    passSpaceEl.textContent = spaceText;
+  }
+
   const start = new Date(booking.startTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   const end = new Date(booking.endTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   document.getElementById('pass-start-time').textContent = start;
@@ -659,6 +706,12 @@ function renderBookingsList() {
         <div class="p-2.5 rounded-lg bg-slate-950 border border-slate-800">
           <span class="text-[10px] text-slate-400 block font-sans">Vehicle Plate:</span>
           <span class="text-white font-bold text-sm">${b.vehicleNumber}</span>
+        </div>
+        <div class="p-2.5 rounded-lg bg-slate-950 border border-slate-800 col-span-2 flex items-center justify-between">
+          <span class="text-[10px] text-slate-400 font-sans flex items-center gap-1">
+            <i class="fa-solid fa-ruler-combined text-cyan-400"></i> Spot Space (m / cm):
+          </span>
+          <span class="text-cyan-300 font-bold">${b.slotSpace?.formatted || '5.0m × 2.5m (500cm × 250cm)'}</span>
         </div>
         <div class="p-2.5 rounded-lg bg-slate-950 border border-slate-800">
           <span class="text-[10px] text-slate-400 block font-sans">Duration:</span>

@@ -173,7 +173,12 @@
                 <span class="w-5 h-5 rounded-full bg-indigo-500/20 text-indigo-400 flex items-center justify-center text-[11px] font-bold">2</span>
                 <span>Select Place Area / Parking Floor</span>
               </label>
-              <span id="area-rate-badge" class="text-xs font-semibold text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full border border-emerald-500/20">₹20 / hr</span>
+              <div class="flex items-center gap-2">
+                <span id="area-space-badge" class="text-xs font-semibold text-cyan-400 bg-cyan-500/10 px-2.5 py-1 rounded-full border border-cyan-500/20 font-mono">
+                  <i class="fa-solid fa-ruler-combined mr-1 text-cyan-400"></i><span id="area-space-val">1,250 m² (125,000 cm²)</span>
+                </span>
+                <span id="area-rate-badge" class="text-xs font-semibold text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full border border-emerald-500/20 font-mono">₹20 / hr</span>
+              </div>
             </div>
 
             <div id="area-tabs-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
@@ -199,6 +204,14 @@
                   <span id="current-area-level" class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">Level -1</span>
                 </div>
                 <p id="current-area-desc" class="text-xs text-slate-400 mt-0.5">Click any available green spot to reserve and proceed to payment.</p>
+                <div id="current-area-space-metrics" class="flex flex-wrap items-center gap-2 text-[11px] font-mono text-cyan-300 mt-1.5">
+                  <span class="bg-cyan-950/40 border border-cyan-500/30 px-2 py-0.5 rounded flex items-center gap-1.5">
+                    <i class="fa-solid fa-arrows-up-down-left-right text-cyan-400"></i> Area Space: <span id="deck-floor-space">50m × 25m (5,000cm × 2,500cm) • 1,250 m²</span>
+                  </span>
+                  <span class="bg-indigo-950/40 border border-indigo-500/30 px-2 py-0.5 rounded flex items-center gap-1.5 text-indigo-300">
+                    <i class="fa-solid fa-arrows-up-to-line text-indigo-400"></i> Height Clearance: <span id="deck-clearance">2.4m (240cm)</span>
+                  </span>
+                </div>
               </div>
 
               <!-- Filter spots by vehicle type -->
@@ -236,8 +249,12 @@
               </div>
 
               <!-- Bottom Driveway Lane -->
-              <div class="mt-6 pt-3 border-t border-dashed border-slate-800 text-center text-[10px] font-mono text-slate-400 uppercase tracking-widest">
-                <i class="fa-solid fa-arrows-left-right text-slate-400 mr-1"></i> SENSOR-INTEGRATED PARKING GUIDANCE SYSTEM • 2.4M HEIGHT CLEARANCE
+              <div class="mt-6 pt-3 border-t border-dashed border-slate-800 text-center text-[10px] font-mono text-slate-400 uppercase tracking-widest flex flex-wrap items-center justify-center gap-4">
+                <span><i class="fa-solid fa-ruler-combined text-cyan-400 mr-1"></i> STANDARD SPOT: 5.0m × 2.5m (500cm × 250cm)</span>
+                <span>•</span>
+                <span><i class="fa-solid fa-arrows-up-to-line text-indigo-400 mr-1"></i> HEIGHT CLEARANCE: 2.4m (240cm)</span>
+                <span>•</span>
+                <span><i class="fa-solid fa-microchip text-emerald-400 mr-1"></i> SENSOR GUIDANCE</span>
               </div>
             </div>
           </div>
@@ -274,6 +291,9 @@
                     <div class="text-xs font-semibold text-white" id="selected-slot-area-name">Basement 1</div>
                     <div class="text-[11px] text-indigo-300 flex items-center gap-1" id="selected-slot-type-info">
                       <i class="fa-solid fa-car"></i> Sedan Spot
+                    </div>
+                    <div class="text-[11px] text-cyan-300 font-mono font-medium flex items-center gap-1 mt-0.5" id="selected-slot-space">
+                      <i class="fa-solid fa-ruler-combined text-cyan-400"></i> 5.0m × 2.5m (500cm × 250cm) • 12.5 m²
                     </div>
                   </div>
                 </div>
@@ -499,6 +519,7 @@
         </div>
         <div class="text-right text-xs">
           <span class="text-white font-semibold block" id="modal-pay-slot-info">Cyber Heights (B1-05)</span>
+          <span class="text-cyan-400 font-mono text-[11px] block mt-0.5" id="modal-pay-space">Space: 5.0m × 2.5m (500cm × 250cm)</span>
           <span class="text-slate-400" id="modal-pay-duration">2 Hours Duration</span>
         </div>
       </div>
@@ -647,6 +668,12 @@
             <div class="p-2.5 rounded-lg bg-slate-900 border border-slate-800">
               <span class="text-[10px] text-slate-400 uppercase block">Floor / Area</span>
               <span id="pass-area-level" class="text-xs font-bold text-white block mt-1">Level -1 (B1)</span>
+            </div>
+            <div class="p-2 rounded-lg bg-slate-900/90 border border-slate-800 col-span-2 text-center">
+              <span class="text-[10px] text-slate-400 uppercase block flex items-center justify-center gap-1">
+                <i class="fa-solid fa-ruler-combined text-cyan-400 text-[10px]"></i> Allocated Spot Space (m / cm)
+              </span>
+              <span id="pass-slot-space" class="text-xs font-bold font-mono text-cyan-300">5.0m × 2.5m (500cm × 250cm) • 12.5 m²</span>
             </div>
           </div>
 

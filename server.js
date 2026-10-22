@@ -32,7 +32,13 @@ const buildings = [
         description: 'Nearest to main elevator lobby, includes high-speed DC EV chargers',
         ratePerHour: 20,
         slotCount: 24,
-        features: ['EV Ready', 'Wide Slots', 'Direct Lift Access']
+        features: ['EV Ready', 'Wide Slots', 'Direct Lift Access'],
+        space: {
+          dimensionsM: '50m × 25m',
+          dimensionsCm: '5,000cm × 2,500cm',
+          totalAreaM2: '1,250 m²',
+          clearance: '2.4m (240cm)'
+        }
       },
       {
         id: 'area-b2',
@@ -41,7 +47,13 @@ const buildings = [
         description: 'Spacious multi-bay parking suitable for large SUVs and sedans',
         ratePerHour: 20,
         slotCount: 30,
-        features: ['Automated Guidance Sensor', 'Covered']
+        features: ['Automated Guidance Sensor', 'Covered'],
+        space: {
+          dimensionsM: '60m × 25m',
+          dimensionsCm: '6,000cm × 2,500cm',
+          totalAreaM2: '1,500 m²',
+          clearance: '2.4m (240cm)'
+        }
       },
       {
         id: 'area-l1',
@@ -50,7 +62,13 @@ const buildings = [
         description: 'Instant drop & pick quick parking for short duration business visits',
         ratePerHour: 25,
         slotCount: 16,
-        features: ['Quick Exit', 'Security Escort', 'Valet Station']
+        features: ['Quick Exit', 'Security Escort', 'Valet Station'],
+        space: {
+          dimensionsM: '35m × 20m',
+          dimensionsCm: '3,500cm × 2,000cm',
+          totalAreaM2: '700 m²',
+          clearance: '3.0m (300cm)'
+        }
       }
     ]
   },
@@ -74,7 +92,13 @@ const buildings = [
         description: 'Direct escalator entrance into IMAX & Food Court',
         ratePerHour: 25,
         slotCount: 20,
-        features: ['Mall Lobby Access', 'Bright LED Zone']
+        features: ['Mall Lobby Access', 'Bright LED Zone'],
+        space: {
+          dimensionsM: '45m × 22m',
+          dimensionsCm: '4,500cm × 2,200cm',
+          totalAreaM2: '990 m²',
+          clearance: '2.5m (250cm)'
+        }
       },
       {
         id: 'area-mall-p2',
@@ -83,7 +107,13 @@ const buildings = [
         description: 'Affordable extended shopping parking with trolley drop areas',
         ratePerHour: 20,
         slotCount: 28,
-        features: ['Trolley Return Point', 'CCTV Monitored']
+        features: ['Trolley Return Point', 'CCTV Monitored'],
+        space: {
+          dimensionsM: '55m × 24m',
+          dimensionsCm: '5,500cm × 2,400cm',
+          totalAreaM2: '1,320 m²',
+          clearance: '2.4m (240cm)'
+        }
       }
     ]
   },
@@ -107,7 +137,13 @@ const buildings = [
         description: 'Concierge serviced executive parking with extra clearance',
         ratePerHour: 25,
         slotCount: 16,
-        features: ['VIP Security', 'Chauffeur Seating', 'Zero Wait Exit']
+        features: ['VIP Security', 'Chauffeur Seating', 'Zero Wait Exit'],
+        space: {
+          dimensionsM: '40m × 20m',
+          dimensionsCm: '4,000cm × 2,000cm',
+          totalAreaM2: '800 m²',
+          clearance: '2.8m (280cm)'
+        }
       },
       {
         id: 'area-bkc-b1',
@@ -116,7 +152,13 @@ const buildings = [
         description: 'Connecting to Tower A & B headquarters',
         ratePerHour: 20,
         slotCount: 26,
-        features: ['Turnstile Access', 'Fast Toll Tag']
+        features: ['Turnstile Access', 'Fast Toll Tag'],
+        space: {
+          dimensionsM: '50m × 25m',
+          dimensionsCm: '5,000cm × 2,500cm',
+          totalAreaM2: '1,250 m²',
+          clearance: '2.4m (240cm)'
+        }
       }
     ]
   },
@@ -140,7 +182,13 @@ const buildings = [
         description: '3 minutes covered walkway directly into Terminal departure gates',
         ratePerHour: 25,
         slotCount: 22,
-        features: ['Direct Terminal Walk', 'Baggage Carts']
+        features: ['Direct Terminal Walk', 'Baggage Carts'],
+        space: {
+          dimensionsM: '45m × 22m',
+          dimensionsCm: '4,500cm × 2,200cm',
+          totalAreaM2: '990 m²',
+          clearance: '2.6m (260cm)'
+        }
       },
       {
         id: 'area-aero-long',
@@ -149,11 +197,76 @@ const buildings = [
         description: 'Secure multi-day and overnight parking with daily capped rates',
         ratePerHour: 15,
         slotCount: 32,
-        features: ['24/7 Guarded', 'Low Daily Cap']
+        features: ['24/7 Guarded', 'Low Daily Cap'],
+        space: {
+          dimensionsM: '65m × 28m',
+          dimensionsCm: '6,500cm × 2,800cm',
+          totalAreaM2: '1,820 m²',
+          clearance: '2.5m (250cm)'
+        }
       }
     ]
   }
 ];
+
+// Dimension specs in metres (m) and centimetres (cm) per vehicle spot type
+const slotDimensionSpecs = {
+  'Sedan': {
+    dimensionsM: '5.0m × 2.5m',
+    dimensionsCm: '500cm × 250cm',
+    areaM2: '12.5 m²',
+    lengthM: '5.0m',
+    widthM: '2.5m',
+    lengthCm: '500cm',
+    widthCm: '250cm',
+    clearance: '2.4m (240cm)',
+    formatted: '5.0m × 2.5m (500cm × 250cm)'
+  },
+  'SUV': {
+    dimensionsM: '5.5m × 2.8m',
+    dimensionsCm: '550cm × 280cm',
+    areaM2: '15.4 m²',
+    lengthM: '5.5m',
+    widthM: '2.8m',
+    lengthCm: '550cm',
+    widthCm: '280cm',
+    clearance: '2.4m (240cm)',
+    formatted: '5.5m × 2.8m (550cm × 280cm)'
+  },
+  'EV': {
+    dimensionsM: '5.2m × 2.6m',
+    dimensionsCm: '520cm × 260cm',
+    areaM2: '13.5 m²',
+    lengthM: '5.2m',
+    widthM: '2.6m',
+    lengthCm: '520cm',
+    widthCm: '260cm',
+    clearance: '2.4m (240cm)',
+    formatted: '5.2m × 2.6m (520cm × 260cm)'
+  },
+  'Compact': {
+    dimensionsM: '4.5m × 2.3m',
+    dimensionsCm: '450cm × 230cm',
+    areaM2: '10.35 m²',
+    lengthM: '4.5m',
+    widthM: '2.3m',
+    lengthCm: '450cm',
+    widthCm: '230cm',
+    clearance: '2.4m (240cm)',
+    formatted: '4.5m × 2.3m (450cm × 230cm)'
+  },
+  'Handicapped': {
+    dimensionsM: '6.0m × 3.6m',
+    dimensionsCm: '600cm × 360cm',
+    areaM2: '21.6 m²',
+    lengthM: '6.0m',
+    widthM: '3.6m',
+    lengthCm: '600cm',
+    widthCm: '360cm',
+    clearance: '2.4m (240cm)',
+    formatted: '6.0m × 3.6m (600cm × 360cm)'
+  }
+};
 
 // Helper to generate slots dynamically for any building and area
 const slotStore = {};
@@ -176,6 +289,7 @@ function initSlotsForArea(buildingId, areaId, count) {
     // Deterministic mock initial occupancy for realistic feel
     const isOccupied = (i * 7) % 5 === 0;
     const isReserved = !isOccupied && (i * 3) % 7 === 0;
+    const spaceSpec = slotDimensionSpecs[slotType] || slotDimensionSpecs['Sedan'];
 
     slots.push({
       id: `${key}_slot_${i}`,
@@ -184,7 +298,8 @@ function initSlotsForArea(buildingId, areaId, count) {
       type: slotType,
       status: isOccupied ? 'OCCUPIED' : (isReserved ? 'RESERVED' : 'AVAILABLE'),
       currentBookingId: null,
-      sensorActive: true
+      sensorActive: true,
+      space: spaceSpec
     });
   }
 
@@ -204,6 +319,17 @@ const bookings = [
     slotId: 'bld-01_area-b1_slot_4',
     slotCode: 'B1-04',
     slotType: 'EV',
+    slotSpace: {
+      dimensionsM: '5.2m × 2.6m',
+      dimensionsCm: '520cm × 260cm',
+      areaM2: '13.5 m²',
+      lengthM: '5.2m',
+      widthM: '2.6m',
+      lengthCm: '520cm',
+      widthCm: '260cm',
+      clearance: '2.4m (240cm)',
+      formatted: '5.2m × 2.6m (520cm × 260cm)'
+    },
     vehicleNumber: 'TS-09-EA-4521',
     vehicleType: 'Electric Vehicle (EV)',
     driverName: 'Rahul Verma',
@@ -297,7 +423,7 @@ app.get('/api/buildings/:id/areas/:areaId/slots', (req, res) => {
     success: true,
     data: {
       building: { id: bld.id, name: bld.name, location: bld.areaLocation },
-      area: { id: area.id, name: area.name, level: area.level, ratePerHour: area.ratePerHour },
+      area: { id: area.id, name: area.name, level: area.level, ratePerHour: area.ratePerHour, space: area.space },
       slots: slots
     }
   });
@@ -449,6 +575,17 @@ app.post('/api/bookings', (req, res) => {
     slotId,
     slotCode: slot.code,
     slotType: slot.type,
+    slotSpace: slot.space || {
+      dimensionsM: '5.0m × 2.5m',
+      dimensionsCm: '500cm × 250cm',
+      areaM2: '12.5 m²',
+      lengthM: '5.0m',
+      widthM: '2.5m',
+      lengthCm: '500cm',
+      widthCm: '250cm',
+      clearance: '2.4m (240cm)',
+      formatted: '5.0m × 2.5m (500cm × 250cm)'
+    },
     vehicleNumber: vehicleNumber.toUpperCase().trim(),
     vehicleType: vehicleType || 'Sedan',
     driverName: driverName.trim(),

@@ -12,11 +12,17 @@ A full-stack Smart Parking Management & Space Booking System with interactive bu
 
 2. **Place Area & Parking Floor Selection**
    - Detailed levels: Basement B1 (Premium & EV), Basement B2 (General), Ground Fast Express, Mall Entertainment Levels, etc.
-   - Per-floor dynamic hourly rate pricing and slot count.
+   - Per-floor dynamic hourly rate pricing, slot count, and floor space dimensions in metres and centimetres (e.g. `1,250 m² (50m × 25m / 5,000cm × 2,500cm)`).
 
-3. **Interactive Visual Parking Deck**
+3. **Interactive Visual Parking Deck & Space Metrics**
    - Real-time slot status: **Available (Green)**, **Occupied (Red)**, **Reserved (Amber)**, **Selected (Indigo)**.
-   - Support for multiple vehicle categories: **Sedan**, **SUV/Van**, **⚡ Electric Vehicle (EV)**, **Two-Wheeler**, **Handicapped**.
+   - Exact spot space & dimensions specified in both **metres (m)** and **centimetres (cm)** for each spot type:
+     - **Sedan**: `5.0m × 2.5m (500cm × 250cm) • 12.5 m²`
+     - **SUV / Van**: `5.5m × 2.8m (550cm × 280cm) • 15.4 m²`
+     - **⚡ EV Charging Spot**: `5.2m × 2.6m (520cm × 260cm) • 13.5 m²`
+     - **Compact**: `4.5m × 2.3m (450cm × 230cm) • 10.35 m²`
+     - **Handicapped**: `6.0m × 3.6m (600cm × 360cm) • 21.6 m²`
+   - Height clearance indicators (e.g. `2.4m (240cm)` to `3.0m (300cm)`).
    - Filtering by spot type.
 
 4. **Transparent Pricing & Calculation Breakdown**
